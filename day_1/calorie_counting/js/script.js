@@ -4,6 +4,8 @@ const textAreaContent = document.querySelector('#area-calories');
 const button = document.querySelector('.btn');
 const spanResult1 = document.querySelector('.which-elf');
 const spanResult2 = document.querySelector('.total-calories');
+const spanResult3 = document.querySelector('.top-three-elves');
+const spanResult4 = document.querySelector('.sum-top-calories');
 
 /**
  * From text, split and store to return a correct array of number.
@@ -69,10 +71,49 @@ function getElfCalories(calories) {
   return [elfPosition, totalCalories];
 }
 
+function getTopThreeElves(calories) {
+  let topThreeElvesPosition = [0, 0, 0];
+  let topThreeElvesCalories = [0, 0, 0];
+  let sumTopThreeElves = 0;
+
+  for (let i = 0; i < calories.length; i++) {
+    if (calories.length > 1) {
+      let totalCalories = 0;
+      for (let y = 0; y < calories[i].length; y++) {
+        totalCalories += calories[i][y];
+      }
+      let indexMinTopThree = topThreeElvesCalories.indexOf(Math.min(...topThreeElvesCalories));
+      if (totalCalories >= topThreeElvesCalories[indexMinTopThree]) {
+        topThreeElvesCalories.splice(indexMinTopThree, 1, totalCalories);
+        topThreeElvesPosition.splice(indexMinTopThree, 1, i);
+      }
+    } else {
+      let totalCalories = calories[i];
+      let indexMinTopThree = topThreeElvesCalories.indexOf(Math.min(...topThreeElvesCalories));
+      if (totalCalories >= topThreeElvesCalories[indexMinTopThree]) {
+        topThreeElvesCalories.splice(indexMinTopThree, 1, totalCalories);
+        topThreeElvesPosition.splice(indexMinTopThree, 1, i);
+      }
+    }
+  }
+
+  topThreeElvesCalories.forEach((cal) => {
+    sumTopThreeElves += cal;
+  })
+
+  topThreeElvesPosition = topThreeElvesPosition.map((p) => p + 1);
+
+  return [topThreeElvesPosition, sumTopThreeElves];
+}
+
 button.addEventListener('click', () => {
   const areaContent = textAreaContent.value;
   const elfCalories = getCaloriesArray(areaContent);
   const [elf, total] = getElfCalories(elfCalories);
   spanResult1.textContent = elf;
   spanResult2.textContent = total;
+
+  const [elvesPositions, sumTopElvesCalories] = getTopThreeElves(elfCalories);
+  spanResult3.textContent = elvesPositions;
+  spanResult4.textContent = sumTopElvesCalories;
 });

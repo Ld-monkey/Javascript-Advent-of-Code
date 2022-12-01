@@ -5,6 +5,6 @@ languages (javascript, html, css).
 
 # Events
 
-   - [ ] Day 1
+   - [X] Day 1
      - [X] [Calorie Counting (part 1)](./day_1/calorie_counting/)
-     - [ ] (part 2)
+     - [X] [Top 3 calorie counting (part 2)](./day_1/calorie_counting/)

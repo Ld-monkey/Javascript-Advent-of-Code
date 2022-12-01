@@ -4,6 +4,10 @@
     padding: 0;
 }
 
+h3 {
+    margin: 10px;
+}
+
 label {
     margin: 20px;
     display: block;
@@ -19,11 +23,11 @@ button {
     padding: 5px;
 }
 
-.results {
-    margin-left: 30px;
-}
-
 span {
     font-size: 1.2em;
     color: tomato;
+}
+
+.results {
+    margin-left: 30px;
 }
