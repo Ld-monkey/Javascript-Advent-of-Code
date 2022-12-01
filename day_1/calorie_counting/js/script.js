@@ -38,25 +38,24 @@ function getCaloriesArray(str) {
  */
 function getElfCalories(calories) {
   let elfPosition = -1, totalCalories = 0;
+
+  const getMaxCalories = (calories, total, index) => {
+    if (calories > total) {
+        totalCalories = calories;
+        elfPosition = index;
+      }
+  }
+
   for (let i = 0; i < calories.length; i++) {
     if (calories[i].length > 1) {
       let countCalories = 0;
       for (let y = 0; y < calories[i].length; y++) {
         countCalories += calories[i][y];
       }
-      if (countCalories > totalCalories) {
-        totalCalories = countCalories;
-        elfPosition = i;
-      }
+      getMaxCalories(countCalories, totalCalories, i);
     } else {
-      let countCalories = 0;
-      for (let y = 0; y < calories[i].length; y++) {
-        countCalories += calories[i][y];
-      }
-      if (countCalories > totalCalories) {
-        totalCalories = countCalories;
-        elfPosition = i;
-      }
+      let countCalories = calories[i];
+      getMaxCalories(countCalories, totalCalories, i);
     }
   }
 
@@ -76,24 +75,24 @@ function getTopThreeElves(calories) {
   let topThreeElvesCalories = [0, 0, 0];
   let sumTopThreeElves = 0;
 
+  const replaceMinTopThreeElves = (totalCalories, index) => {
+    let indexMinTopThree = topThreeElvesCalories.indexOf(Math.min(...topThreeElvesCalories));
+    if (totalCalories >= topThreeElvesCalories[indexMinTopThree]) {
+      topThreeElvesCalories.splice(indexMinTopThree, 1, totalCalories);
+      topThreeElvesPosition.splice(indexMinTopThree, 1, index);
+    }
+  }
+
   for (let i = 0; i < calories.length; i++) {
     if (calories.length > 1) {
       let totalCalories = 0;
       for (let y = 0; y < calories[i].length; y++) {
         totalCalories += calories[i][y];
       }
-      let indexMinTopThree = topThreeElvesCalories.indexOf(Math.min(...topThreeElvesCalories));
-      if (totalCalories >= topThreeElvesCalories[indexMinTopThree]) {
-        topThreeElvesCalories.splice(indexMinTopThree, 1, totalCalories);
-        topThreeElvesPosition.splice(indexMinTopThree, 1, i);
-      }
+      replaceMinTopThreeElves(totalCalories, i);
     } else {
       let totalCalories = calories[i];
-      let indexMinTopThree = topThreeElvesCalories.indexOf(Math.min(...topThreeElvesCalories));
-      if (totalCalories >= topThreeElvesCalories[indexMinTopThree]) {
-        topThreeElvesCalories.splice(indexMinTopThree, 1, totalCalories);
-        topThreeElvesPosition.splice(indexMinTopThree, 1, i);
-      }
+      replaceMinTopThreeElves(totalCalories, i);
     }
   }
 
