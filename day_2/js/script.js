@@ -1,10 +1,3 @@
-/**
- * Selector tous les elements
- * Récupérer les valeurs et les splitter en \n puis en espace.
- * Parcourir la matrice et ajouter le score en fonction de la lettre puis
- * retourner le score total.
- */
-
 console.log('--- Day 2: Rock Paper Scissors ---');
 
 const contentTextArea = document.querySelector('#rock-paper-scissors');
