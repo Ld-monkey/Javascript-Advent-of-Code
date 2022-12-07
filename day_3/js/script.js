@@ -1,6 +1,7 @@
 const content = document.querySelector('#input');
 const btn = document.querySelector('.btn');
 const span1 = document.querySelector('.priorities');
+const span2 = document.querySelector('.three-elves');
 
 function getPriorities(letter) {
   let prioritiesLowercase = [
@@ -40,12 +41,45 @@ function findOccurences(arr) {
   return a;
 }
 
+function getGroupThreeElves(str) {
+  let rucksack = str.trim().split('\n');
+  let groupeArray = []
+  for (let index = 3; index <= rucksack.length; index += 3) {
+    groupeArray.push([rucksack[(index) - 3], rucksack[(index) - 2], rucksack[(index) - 1]])
+  }
+  return groupeArray;
+}
+
+function groupOccurences(groups) {
+  return item = groups.map((a) => {
+    for (let i = 0; i < a[0].length; i++) {
+      let firstLetter = a[0][i];
+      for (let y = 0; y < a[1].length; y++) {
+        if (firstLetter === a[1][y]) {
+          for (let z = 0; z < a[2].length; z++) {
+            if (firstLetter === a[2][z]) {
+              return firstLetter;
+              break;
+            }
+          }
+        }
+      }
+    }
+  });
+}
+
 btn.addEventListener('click', () => {
   const values = content.value;
+
+  /** First part. */
   const bothItems = getBothItems(values);
-  console.log(bothItems);
   const typeOccurences = findOccurences(bothItems);
-  console.log('typeOccurences :', typeOccurences);
   const priorities = typeOccurences.reduce((mount, elemt) => mount += getPriorities(elemt), 0);
   span1.textContent = priorities;
+
+  /** Second part. */
+  const groups = getGroupThreeElves(values);
+  const itemsGroups = groupOccurences(groups);
+  const sumThreePriorities = itemsGroups.reduce((mount, elemt) => mount += getPriorities(elemt), 0);
+  span2.textContent = sumThreePriorities;
 });
