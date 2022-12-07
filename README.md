@@ -11,3 +11,7 @@ languages (javascript, html, css).
    - [X] Day 2
      - [X] [Rock Paper Scissors (part 1)](./day_2/)
      - [X] [Rock Paper Scissors (part 2)](./day_2/)
+   - [X] Day 3
+     - [X] [Rucksack Reorganization (part 1)](./day_3/)
+     - [X] [Rucksack Reorganization (part 2)](./day_3/)
+   
