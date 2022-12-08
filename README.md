@@ -1,7 +1,7 @@
 # Advent of Code (Javascript)
 
 Try to solve all the problems of [Advent of Code](https://adventofcode.com/) in
-languages (javascript, html, css).
+languages (javascript, html and css).
 
 # Events
 
@@ -14,4 +14,6 @@ languages (javascript, html, css).
    - [X] Day 3
      - [X] [Rucksack Reorganization (part 1)](./day_3/)
      - [X] [Rucksack Reorganization (part 2)](./day_3/)
-   
+   - [X] Day 4
+     - [X] [Camp Cleanup (part 1)](./day_4/)
+     - [X] [Camp Cleanup (part 2)](./day_4/)
